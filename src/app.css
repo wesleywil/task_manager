@@ -1,3 +1,9 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+
+table,tr,td{
+    border: 1px solid black;
+    padding: 2px
+}
