@@ -16,8 +16,8 @@ model Project {
   description String?        @db.Text()
   status      Project_Status @default(IN_PROGRESS)
   priority    Priority       @default(MEDIUM)
-  start_date  DateTime
-  due_date    DateTime
+  start_date  DateTime       @default(now()) @db.DateTime(0)
+  due_date    DateTime       @db.DateTime(0)
   tasks       Task[]
 }
 
@@ -27,7 +27,7 @@ model Task {
   description String?     @db.Text()
   status      Task_Status @default(TO_DO)
   priority    Priority    @default(MEDIUM)
-  due_date    DateTime
+  due_date    DateTime    @db.DateTime(0)
   tags        Tag[]
   projectId   Int
   project     Project     @relation(fields: [projectId], references: [id])
