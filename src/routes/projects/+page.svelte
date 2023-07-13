@@ -1,6 +1,12 @@
 <script lang="ts">
+  import ProjectForm from "$lib/components/project_form/ProjectForm.svelte";
   import ProjectItem from "$lib/components/project_item/ProjectItem.svelte";
   import ProjectTable from "$lib/components/project_table/ProjectTable.svelte";
+  import { utils } from "../../store/utils";
+
+  const switchHideForm = () => utils.switchHideForm();
+  let hideForm = true;
+  $: hideForm = $utils.hideForm;
 
   async function getProjects() {
     const res = await fetch("http://localhost:5173/api/projects", {
@@ -14,7 +20,13 @@
 {#await getProjects()}
   <p>Loading...</p>
 {:then projects}
-  <div class="w-full h-full text-center">
+  {#if hideForm}
+    <div />
+  {:else}
+    <ProjectForm />
+  {/if}
+
+  <div class="w-full h-full text-center z-0">
     <h1 class="mt-24 mb-8 text-6xl font-bold">PROJECTS</h1>
     <!-- Favorites -->
     <h2 class="px-8 text-left text-2xl">Favorites</h2>
@@ -27,6 +39,11 @@
     <h2 class="px-8 text-left text-2xl">All Projects</h2>
     <div class="p-8 flex flex-col gap-4">
       <div class="flex">
+        <button
+          on:click={switchHideForm}
+          class="mr-4 px-2 py-1 text-xl font-bold text-white bg-red-400 hover:bg-red-600 rounded"
+          >+</button
+        >
         <input
           type="text"
           placeholder="Search Project"

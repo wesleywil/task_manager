@@ -1,6 +1,6 @@
-import { json } from "@sveltejs/kit";
+import { goto } from "$app/navigation";
+import { json, fail, redirect } from "@sveltejs/kit";
 import prisma from "../../../../prisma/client";
-
 
 export async function GET() {
   try {
@@ -18,10 +18,19 @@ export async function GET() {
   }
 }
 
-export async function POST({request}) {
-  const { name, description, status, priority, due_date } =
-    await request.json();
-    
+export async function POST({ request }) {
+  const formData = await request.formData();
+
+  const fields = ["name", "description", "status", "priority", "due_date"];
+  const formDataValues = {} as any;
+
+  for (const field of fields) {
+    formDataValues[field] = formData.get(field);
+  }
+
+  const { name, description, status, priority, due_date } = formDataValues;
+  const date = new Date(due_date);
+  const formattedDueDate = date.toISOString();
 
   try {
     await prisma.project.create({
@@ -31,14 +40,11 @@ export async function POST({request}) {
         status,
         priority,
         start_date: new Date(),
-        due_date,
+        due_date:formattedDueDate,
       },
     });
-    return json(
-      { message: "A new project was added successfully!" },
-      { status: 201 }
-    );
-  } catch (error:any) {
+    return Response.redirect("http://localhost:5173/projects",201)
+  } catch (error: any) {
     return json(
       { message: "An server error has occurred", error: error.message },
       { status: 500 }
