@@ -65,7 +65,10 @@ export async function DELETE({ params, request }: { params: { id: number }, requ
                 id:Number(params.id)
             },
         })
-        return Response.redirect("http://localhost:5173/projects", 202)
+        return json(
+            { message: "Project deleted successfully!"},
+            { status: 201 }
+          );
     }catch(error){
         return json(
             { message: "An server error has occurred", error: error },

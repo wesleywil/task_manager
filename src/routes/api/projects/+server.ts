@@ -43,7 +43,7 @@ export async function POST({ request }) {
         due_date:formattedDueDate,
       },
     });
-    return Response.redirect("http://localhost:5173/projects",201)
+    return Response.redirect("http://localhost:5173/projects")
   } catch (error: any) {
     return json(
       { message: "An server error has occurred", error: error.message },
