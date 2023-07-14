@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ProjectDeletePanel from "$lib/components/project_delete_panel/ProjectDeletePanel.svelte";
   import ProjectForm from "$lib/components/project_form/ProjectForm.svelte";
   import ProjectItem from "$lib/components/project_item/ProjectItem.svelte";
   import ProjectTable from "$lib/components/project_table/ProjectTable.svelte";
@@ -7,6 +8,8 @@
   const switchHideForm = () => utils.switchHideForm();
   let hideForm = true;
   $: hideForm = $utils.hideForm;
+  let hideDeletePanel = true;
+  $: hideDeletePanel = $utils.hideDeletePanel;
 
   async function getProjects() {
     const res = await fetch("http://localhost:5173/api/projects", {
@@ -52,6 +55,12 @@
         <button class="bg-black text-white px-2 py-1 rounded-r">Search</button>
       </div>
       <!-- Project List Table -->
+      {#if hideDeletePanel}
+        <div />
+      {:else}
+        <ProjectDeletePanel />
+      {/if}
+
       <ProjectTable {projects} />
     </div>
   </div>

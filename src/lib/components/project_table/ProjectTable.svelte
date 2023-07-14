@@ -7,6 +7,11 @@
     utils.switchHideForm();
     utils.selectProjectId(id);
   };
+
+  const switchHideDeletePanel = (id: number) => {
+    utils.switchHideDeletePanel();
+    utils.selectProjectId(id);
+  };
 </script>
 
 <div>
@@ -36,7 +41,7 @@
     {#each projects as project}
       <tr class="border-b border-black">
         <td><input type="checkbox" /></td>
-        <td><span>{project.name}</span></td>
+        <td class="px-2"><span>{project.name}</span></td>
         <td
           ><p class="p-2">
             {project.description}
@@ -47,15 +52,25 @@
             >{project.status}</span
           ></td
         >
-        <td>{project.start_date}-{project.due_date}</td>
-        <td><span class="text-red-600 font-bold">{project.priority}</span></td>
+        <td class="px-2"
+          >{project.start_date.slice(0, 10)} --- {project.due_date.slice(
+            0,
+            10
+          )}</td
+        >
+        <td
+          ><span class="px-2 text-red-600 font-bold">{project.priority}</span
+          ></td
+        >
         <td>
           <div class="flex flex-wrap gap-2 justify-center">
             <button
               on:click={() => switchHideForm(project.id)}
               class="px-2 bg-green-400 font-semibold rounded">Edit</button
             >
-            <button class="px-2 bg-red-400 font-semibold rounded">Delete</button
+            <button
+              on:click={() => switchHideDeletePanel(project.id)}
+              class="px-2 bg-red-400 font-semibold rounded">Delete</button
             >
           </div>
         </td>

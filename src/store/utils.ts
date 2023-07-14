@@ -2,12 +2,14 @@ import { writable } from "svelte/store";
 
 export interface Utils {
   hideForm: boolean;
+  hideDeletePanel:boolean;
   projectId: number;
 }
 
 const initStore = () => {
   const initialCounter: Utils = {
     hideForm: true,
+    hideDeletePanel:true,
     projectId: 0,
   };
 
@@ -20,6 +22,12 @@ const initStore = () => {
         ...rest,
         projectId: 0,
         hideForm: !hideForm,
+      })),
+      switchHideDeletePanel: () =>
+      update(({ hideDeletePanel, ...rest }) => ({
+        ...rest,
+        projectId: 0,
+        hideDeletePanel: !hideDeletePanel,
       })),
     selectProjectId: (id: number) => {
       update((state) => ({
