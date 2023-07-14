@@ -1,5 +1,12 @@
 <script lang="ts">
+  import { utils } from "../../../store/utils";
+
   export let projects: Array<any>;
+
+  const switchHideForm = (id: number) => {
+    utils.switchHideForm();
+    utils.selectProjectId(id);
+  };
 </script>
 
 <div>
@@ -42,16 +49,11 @@
         >
         <td>{project.start_date}-{project.due_date}</td>
         <td><span class="text-red-600 font-bold">{project.priority}</span></td>
-        <!-- <td
-        ><div class="py-1 flex flex-col gap-2 items-center">
-          <span class="w-fit px-2 bg-yellow-200 rounded">Design</span><span
-            class="w-fit px-2 bg-red-200 rounded">Development</span
-          >
-        </div></td
-      > -->
         <td>
           <div class="flex flex-wrap gap-2 justify-center">
-            <button class="px-2 bg-green-400 font-semibold rounded">Edit</button
+            <button
+              on:click={() => switchHideForm(project.id)}
+              class="px-2 bg-green-400 font-semibold rounded">Edit</button
             >
             <button class="px-2 bg-red-400 font-semibold rounded">Delete</button
             >
@@ -59,63 +61,5 @@
         </td>
       </tr>
     {/each}
-    <!-- <tr class="border-b border-black">
-      <td><input type="checkbox" /></td>
-      <td><span>Project name</span></td>
-      <td
-        ><p class="p-2">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        </p></td
-      >
-      <td
-        ><span class="px-2 bg-green-500 text-white font-semibold rounded-xl"
-          >In Progress</span
-        ></td
-      >
-      <td>07/12/2023-08/12/2023</td>
-      <td><span class="text-red-600 font-bold">High</span></td>
-      <td
-        ><div class="py-1 flex flex-col gap-2 items-center">
-          <span class="w-fit px-2 bg-yellow-200 rounded">Design</span><span
-            class="w-fit px-2 bg-red-200 rounded">Development</span
-          >
-        </div></td
-      >
-      <td>
-        <div class="flex flex-wrap gap-2 justify-center">
-          <button class="px-2 bg-green-400 font-semibold rounded">Edit</button>
-          <button class="px-2 bg-red-400 font-semibold rounded">Delete</button>
-        </div>
-      </td>
-    </tr>
-    <tr class="border-b border-black">
-      <td><input type="checkbox" /></td>
-      <td><span>Project name</span></td>
-      <td
-        ><p class="p-2">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-        </p></td
-      >
-      <td
-        ><span class="px-2 bg-green-500 text-white font-semibold rounded-xl"
-          >In Progress</span
-        ></td
-      >
-      <td>07/12/2023-08/12/2023</td>
-      <td><span class="text-red-600 font-bold">High</span></td>
-      <td
-        ><div class="flex flex-col gap-2 items-center">
-          <span class="w-fit px-2 bg-yellow-200 rounded">Design</span><span
-            class="w-fit px-2 bg-red-200 rounded">Development</span
-          >
-        </div></td
-      >
-      <td>
-        <div class="flex flex-wrap gap-2 justify-center">
-          <button class="px-2 bg-green-400 font-semibold rounded">Edit</button>
-          <button class="px-2 bg-red-400 font-semibold rounded">Delete</button>
-        </div>
-      </td>
-    </tr> -->
   </table>
 </div>
