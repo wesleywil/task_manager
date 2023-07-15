@@ -1,7 +1,6 @@
 <script lang="ts">
   import { utils } from "../../../store/utils";
-
-  export let projects: Array<any>;
+  import { projects as filteredProjects } from "../../../store/projects";
 
   const switchHideForm = (id: number) => {
     utils.switchHideForm();
@@ -12,6 +11,8 @@
     utils.switchHideDeletePanel();
     utils.selectProjectId(id);
   };
+  let prs: Array<any> = [];
+  $: prs = $filteredProjects.projects;
 </script>
 
 <div>
@@ -38,7 +39,7 @@
       <th class="px-1 bg-slate-400 text-white border-r border-black">Actions</th
       >
     </tr>
-    {#each projects as project}
+    {#each $filteredProjects.projects as project}
       <tr class="border-b border-black">
         <td><input type="checkbox" /></td>
         <td class="px-2"><span>{project.name}</span></td>
@@ -53,10 +54,9 @@
           ></td
         >
         <td class="px-2"
-          >{project.start_date.slice(0, 10)} --- {project.due_date.slice(
-            0,
-            10
-          )}</td
+          >{String(project.start_date).slice(0, 10)} --- {String(
+            project.due_date
+          ).slice(0, 10)}</td
         >
         <td
           ><span class="px-2 text-red-600 font-bold">{project.priority}</span

@@ -4,6 +4,8 @@
   import ProjectItem from "$lib/components/project_item/ProjectItem.svelte";
   import ProjectTable from "$lib/components/project_table/ProjectTable.svelte";
   import { utils } from "../../store/utils";
+  import { projects as projectStore } from "../../store/projects";
+  import type { Project } from "@prisma/client";
 
   const switchHideForm = () => utils.switchHideForm();
   let hideForm = true;
@@ -15,8 +17,21 @@
     const res = await fetch("http://localhost:5173/api/projects", {
       cache: "no-cache",
     });
-    const projects: Array<any> = await res.json();
+    const projects: any[] = await res.json();
+    projectStore.setProjects(projects);
     return projects;
+  }
+
+  let searchValue: string = "";
+
+  function handleChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    searchValue = target.value;
+    console.log("Test => ", target.value);
+  }
+
+  function handleSearch() {
+    projectStore.filterProject2(searchValue);
   }
 </script>
 
@@ -35,7 +50,7 @@
     <h2 class="px-8 text-left text-2xl">Favorites</h2>
     <div class="w-full p-8 flex gap-4 flex-wrap">
       {#each projects as project}
-        <ProjectItem name={project.name} tasks={project.tasks} />
+        <ProjectItem name={project.name} tasks={[]} />
       {/each}
     </div>
     <!-- All Projects -->
@@ -49,10 +64,14 @@
         >
         <input
           type="text"
+          on:change={handleChange}
           placeholder="Search Project"
           class="w-1/3 px-2 py-1 rounded-l"
         />
-        <button class="bg-black text-white px-2 py-1 rounded-r">Search</button>
+        <button
+          on:click={handleSearch}
+          class="bg-black text-white px-2 py-1 rounded-r">Search</button
+        >
       </div>
       <!-- Project List Table -->
       {#if hideDeletePanel}
@@ -61,7 +80,7 @@
         <ProjectDeletePanel />
       {/if}
 
-      <ProjectTable {projects} />
+      <ProjectTable />
     </div>
   </div>
 {:catch error}

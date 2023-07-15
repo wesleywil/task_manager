@@ -1,6 +1,8 @@
 <script lang="ts">
+  import type { Task } from "../../../utils/interfaces";
+
   export let name: string;
-  export let tasks: Array<any>;
+  export let tasks: Task[];
 </script>
 
 <div
