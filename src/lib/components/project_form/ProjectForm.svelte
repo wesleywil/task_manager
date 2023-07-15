@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { convertToDatetimeLocal } from "../../../utils/utils";
   import { utils } from "../../../store/utils";
+  import Loading from "../loading/Loading.svelte";
 
   const switchHideForm = () => utils.switchHideForm();
 
@@ -75,7 +76,7 @@
       </form>
     {:else}~
       {#await getProjectById()}
-        <p>Loading...</p>
+        <Loading />
       {:then project}
         <form
           method="POST"

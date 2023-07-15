@@ -6,6 +6,7 @@
   import { utils } from "../../store/utils";
   import { projects as projectStore } from "../../store/projects";
   import type { Project } from "@prisma/client";
+  import Loading from "$lib/components/loading/Loading.svelte";
 
   const switchHideForm = () => utils.switchHideForm();
   let hideForm = true;
@@ -36,7 +37,7 @@
 </script>
 
 {#await getProjects()}
-  <p>Loading...</p>
+  <Loading />
 {:then projects}
   {#if hideForm}
     <div />
