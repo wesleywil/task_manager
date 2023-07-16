@@ -8,3 +8,13 @@ export function convertToDatetimeLocal(isoString:string){
 
     return `${year}-${month}-${day}T${hours}:${minutes}`;
 }
+
+export const boolenify = (value:string):boolean=>{
+    const truthy:string[]=[
+        'on',
+        'true',
+        'True',
+        '1'
+    ]
+    return truthy.includes(value)
+}

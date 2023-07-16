@@ -2,7 +2,9 @@
   import { onMount } from "svelte";
   import { convertToDatetimeLocal } from "../../../utils/utils";
   import { utils } from "../../../store/utils";
+  import type { Project } from "../../../utils/interfaces";
   import Loading from "../loading/Loading.svelte";
+  import ProjectUpdateForm from "../project_update_form/ProjectUpdateForm.svelte";
 
   const switchHideForm = () => utils.switchHideForm();
 
@@ -13,7 +15,7 @@
     const res = await fetch(`http://localhost:5173/api/projects/${projectId}`, {
       cache: "no-cache",
     });
-    const project: any = await res.json();
+    const project: Project = await res.json();
     return project;
   }
 </script>
@@ -39,6 +41,11 @@
           placeholder="Project's Name"
           class="w-2/3 px-2 py-1 rounded"
         />
+        <div class="w-2/3 px-2 py-1 flex gap-2 bg-white rounded">
+          <span class="self-center text-slate-400">Set as Favorite: </span>
+          <input type="checkbox" name="favorite" class="w-8 h-8" />
+        </div>
+
         <textarea
           rows="5"
           name="description"
@@ -78,7 +85,8 @@
       {#await getProjectById()}
         <Loading />
       {:then project}
-        <form
+        <ProjectUpdateForm {project} />
+        <!-- <form
           method="POST"
           action={`/api/projects/${$utils.projectId}`}
           class="w-1/2 p-2 py-4 font-semibold flex flex-col gap-4 items-center justify-center bg-slate-700 border border-white rounded"
@@ -90,6 +98,17 @@
             placeholder="Project's Name"
             class="w-2/3 px-2 py-1 rounded"
           />
+          <div class="w-2/3 px-2 py-1 flex gap-2 bg-white rounded">
+            <span class="self-center text-slate-400"
+              >Set as Favorite: {project.favorite}</span
+            >
+            <input
+              type="checkbox"
+              bind:checked={project.favorite}
+              name="favorite"
+              class="w-8 h-8"
+            />
+          </div>
           <textarea
             rows="5"
             name="description"
@@ -119,7 +138,7 @@
             type="datetime-local"
             step="1"
             name="due_date"
-            value={convertToDatetimeLocal(project.due_date)}
+            value={convertToDatetimeLocal(String(project.due_date))}
             class="w-2/3 px-2 py-1 rounded"
           />
           <div class="flex justify-center gap-4">
@@ -135,7 +154,7 @@
               >Cancel</button
             >
           </div>
-        </form>
+        </form> -->
       {/await}
     {/if}
   </div>

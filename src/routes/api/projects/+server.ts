@@ -1,6 +1,7 @@
 import { goto } from "$app/navigation";
 import { json, fail, redirect } from "@sveltejs/kit";
 import prisma from "../../../../prisma/client";
+import { boolenify } from "../../../utils/utils";
 
 export async function GET() {
   try {
@@ -21,17 +22,17 @@ export async function GET() {
 export async function POST({ request }) {
   const formData = await request.formData();
 
-  const fields = ["name", "description", "status", "priority", "due_date"];
+  const fields = ["name", "description", "status", "priority", "favorite" ,"due_date"];
   const formDataValues = {} as any;
 
   for (const field of fields) {
     formDataValues[field] = formData.get(field);
   }
 
-  const { name, description, status, priority, due_date } = formDataValues;
+  const { name, description, status, priority, favorite, due_date } = formDataValues;
   const date = new Date(due_date);
   const formattedDueDate = date.toISOString();
-
+  
   try {
     await prisma.project.create({
       data: {
@@ -39,6 +40,7 @@ export async function POST({ request }) {
         description,
         status,
         priority,
+        favorite:boolenify(favorite),
         start_date: new Date(),
         due_date:formattedDueDate,
       },

@@ -41,7 +41,7 @@
     </tr>
     {#each $filteredProjects.projects as project}
       <tr class="border-b border-black">
-        <td><input type="checkbox" /></td>
+        <td><span>{project.favorite ? "Yes" : "No"}</span></td>
         <td class="px-2"><span>{project.name}</span></td>
         <td
           ><p class="p-2">
