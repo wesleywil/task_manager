@@ -18,6 +18,7 @@ model Project {
   priority    Priority       @default(MEDIUM)
   start_date  DateTime       @default(now()) @db.DateTime(0)
   due_date    DateTime       @db.DateTime(0)
+  favorite    Boolean        @default(false)
   tasks       Task[]
 }
 

@@ -6,6 +6,7 @@ export interface Project{
     priority:Priority,
     start_date?:Date,
     due_date:Date,
+    favorite:boolean,
     tasks?:Task[]
 }
 
