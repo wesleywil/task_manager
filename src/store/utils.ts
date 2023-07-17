@@ -2,6 +2,7 @@ import { writable } from "svelte/store";
 
 export interface Utils {
   hideForm: boolean;
+  hideTaskForm:boolean;
   hideDeletePanel:boolean;
   projectId: number;
 }
@@ -9,6 +10,7 @@ export interface Utils {
 const initStore = () => {
   const initialCounter: Utils = {
     hideForm: true,
+    hideTaskForm:true,
     hideDeletePanel:true,
     projectId: 0,
   };
@@ -22,6 +24,11 @@ const initStore = () => {
         ...rest,
         projectId: 0,
         hideForm: !hideForm,
+      })),
+      switchTaskForm: () =>
+      update(({ hideTaskForm, ...rest }) => ({
+        ...rest,
+        hideTaskForm: !hideTaskForm,
       })),
       switchHideDeletePanel: () =>
       update(({ hideDeletePanel, ...rest }) => ({
