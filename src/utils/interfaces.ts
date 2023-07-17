@@ -7,7 +7,7 @@ export interface Project{
     start_date?:Date,
     due_date:Date,
     favorite:boolean,
-    tasks?:Task[]
+    tasks:Task[]
 }
 
 export interface Task{
@@ -18,22 +18,22 @@ export interface Task{
     priority:Priority,
     due_date:Date,
 }
-enum Priority {
+export enum Priority {
     HIGH,
     MEDIUM,
     LOW
   }
 
-enum Project_Status{
+export enum Project_Status{
     IN_PROGRESS,
     COMPLETED,
     PENDING
 }
 
-enum Task_Status {
-    TO_DO,
-    IN_PROGRESS,
-    COMPLETED,
-    BLOCKED
+export enum Task_Status {
+    TO_DO = "TO_DO",
+    IN_PROGRESS = "IN_PROGRESS",
+    COMPLETED = "COMPLETED",
+    BLOCKED = "BLOCKED"
   }
 
