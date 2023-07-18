@@ -30,7 +30,7 @@
       </div>
       <!-- Favorites -->
       <div class="flex flex-col gap-4">
-        <a href="/projects" class="text-xl font-semibold">Favorites</a>
+        <h1 class="text-xl font-semibold">Favorites</h1>
         <div class="flex flex-col gap-2">
           {#await projects}
             <h2>Loading...</h2>
@@ -39,7 +39,9 @@
               {#if project.favorite}
                 <div class="flex gap-2 items-center">
                   <span class="bg-red-400 w-3 h-3 rounded-full" />
-                  <h2>{project.name}</h2>
+                  <a href={`/projects/${project.id}/tasks`} target="_self"
+                    >{project.name}</a
+                  >
                 </div>
               {/if}
             {/each}
@@ -56,7 +58,9 @@
             {#each projects as project}
               <div class="flex gap-2 items-center">
                 <span class="bg-slate-300 w-3 h-3 rounded-full" />
-                <h2>{project.name}</h2>
+                <a href={`/projects/${project.id}/tasks`} target="_self"
+                  >{project.name}</a
+                >
               </div>
             {/each}
           {/await}
