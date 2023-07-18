@@ -49,7 +49,7 @@
       <div class="w-[20vw] p-1 flex flex-col border border-black rounded">
         <h1 class="font-semibold">
           To Do
-          <span class="px-2 bg-black text-white rounded-full">6</span>
+          <span class="px-2 bg-yellow-500 text-white rounded-full">6</span>
         </h1>
         <button
           on:click={() => {
@@ -70,7 +70,7 @@
       </div>
       <div class="w-[20vw] p-1 flex flex-col border border-black rounded">
         <h1 class="font-semibold">
-          In Progress <span class="px-2 bg-black text-white rounded-full"
+          In Progress <span class="px-2 bg-blue-500 text-white rounded-full"
             >6</span
           >
         </h1>
@@ -93,7 +93,9 @@
       </div>
       <div class="w-[20vw] p-1 flex flex-col border border-black rounded">
         <h1 class="font-semibold">
-          Completed <span class="px-2 bg-black text-white rounded-full">3</span>
+          Completed <span class="px-2 bg-green-500 text-white rounded-full"
+            >3</span
+          >
         </h1>
         <button
           on:click={() => {
@@ -114,7 +116,8 @@
       </div>
       <div class="w-[20vw] p-1 flex flex-col border border-black rounded">
         <h1 class="font-semibold">
-          Blocked <span class="px-2 bg-black text-white rounded-full">12</span>
+          Blocked <span class="px-2 bg-red-500 text-white rounded-full">12</span
+          >
         </h1>
         <button
           on:click={() => {

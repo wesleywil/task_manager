@@ -17,6 +17,7 @@ export interface Task{
     status:Task_Status,
     priority:Priority,
     due_date:Date,
+    projectId:number;
 }
 export enum Priority {
     HIGH,

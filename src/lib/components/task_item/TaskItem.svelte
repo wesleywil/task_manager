@@ -1,10 +1,12 @@
 <script lang="ts">
   import type { Task } from "../../../utils/interfaces";
+  import TaskItemStatusUpdate from "../task_item_status_update/TaskItemStatusUpdate.svelte";
 
   export let task: Task = {} as Task;
 </script>
 
 <div class="w-11/12 mx-auto p-1 bg-slate-200 rounded shadow">
+  <TaskItemStatusUpdate {task} />
   <h1 class="text-xl font-semibold">{task.title}</h1>
   <p class="text-slate-600 text-xs">
     {task.description}
