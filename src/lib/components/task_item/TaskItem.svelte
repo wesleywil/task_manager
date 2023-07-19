@@ -1,8 +1,14 @@
 <script lang="ts">
+  import { utils } from "../../../store/utils";
   import type { Task } from "../../../utils/interfaces";
   import TaskItemStatusUpdate from "../task_item_status_update/TaskItemStatusUpdate.svelte";
 
   export let task: Task = {} as Task;
+
+  const switchUpdateTaskForm = (id: number) => {
+    utils.switchTaskForm();
+    utils.selectTaskId(id);
+  };
 </script>
 
 <div class="w-11/12 mx-auto p-1 bg-slate-200 rounded shadow">
@@ -22,4 +28,9 @@
       <span class="px-2 font-semibold bg-purple-200">Front-End</span>
     </div>
   </div>
+  <button
+    on:click={() => switchUpdateTaskForm(task.id)}
+    class="w-full mt-2 text-xl bg-green-400 hover:bg-green-600 text-black font-semibold rounded-xl"
+    >Update</button
+  >
 </div>

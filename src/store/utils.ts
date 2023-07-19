@@ -5,6 +5,7 @@ export interface Utils {
   hideTaskForm:boolean;
   hideDeletePanel:boolean;
   projectId: number;
+  taskId:number;
 }
 
 const initStore = () => {
@@ -13,6 +14,7 @@ const initStore = () => {
     hideTaskForm:true,
     hideDeletePanel:true,
     projectId: 0,
+    taskId:0,
   };
 
   const { subscribe, set, update } = writable(initialCounter);
@@ -40,6 +42,12 @@ const initStore = () => {
       update((state) => ({
         ...state,
         projectId: id,
+      }));
+    },
+    selectTaskId: (id: number) => {
+      update((state) => ({
+        ...state,
+        taskId: id,
       }));
     },
   };

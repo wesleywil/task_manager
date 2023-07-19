@@ -76,5 +76,5 @@
       />
     {/if}
   </div>
-  <h1 class="text-sm">update</h1>
+  <h1 class="text-sm">status</h1>
 </div>
