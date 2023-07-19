@@ -4,6 +4,7 @@ export interface Utils {
   hideForm: boolean;
   hideTaskForm:boolean;
   hideDeletePanel:boolean;
+  hideDeleteTaskPanel:boolean;
   projectId: number;
   taskId:number;
 }
@@ -13,6 +14,7 @@ const initStore = () => {
     hideForm: true,
     hideTaskForm:true,
     hideDeletePanel:true,
+    hideDeleteTaskPanel:true,
     projectId: 0,
     taskId:0,
   };
@@ -37,6 +39,12 @@ const initStore = () => {
         ...rest,
         projectId: 0,
         hideDeletePanel: !hideDeletePanel,
+      })),
+      switchHideDeleteTaskPanel: () =>
+      update(({ hideDeleteTaskPanel, ...rest }) => ({
+        ...rest,
+        taskId:0,
+        hideDeleteTaskPanel: !hideDeleteTaskPanel,
       })),
     selectProjectId: (id: number) => {
       update((state) => ({
