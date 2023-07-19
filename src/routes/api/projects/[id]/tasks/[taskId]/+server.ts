@@ -39,3 +39,19 @@ export async function POST({ params, request }: { params: { taskId:number,id: nu
           );
     }
 }
+
+export async function DELETE({ params, request }: { params: { taskId:number,id: number }, request:Request }){
+    try{
+        await prisma.task.delete({
+            where:{
+                id:Number(params.taskId)
+            }
+        })
+        return json({message:"Task Deleted successfully!"},{status:200})
+    }catch(error:any){
+        return json(
+            { message: "An server error has occurred", error: error.message },
+            { status: 500 }
+          );
+    }
+}
