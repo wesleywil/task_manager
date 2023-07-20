@@ -13,6 +13,7 @@
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.20.4",
 		"autoprefixer": "^10.4.14",
+		"daisyui": "^3.3.1",
 		"postcss": "^8.4.25",
 		"prisma": "^5.0.0",
 		"svelte": "^4.0.0",
@@ -24,6 +25,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@prisma/client": "^5.0.0"
+		"@prisma/client": "^5.0.0",
+		"svelte-icons": "^2.1.0"
 	}
 }
