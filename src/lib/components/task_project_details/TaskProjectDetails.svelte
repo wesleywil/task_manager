@@ -1,19 +1,39 @@
 <script lang="ts">
+  import FaPlus from "svelte-icons/fa/FaPlus.svelte";
+
+  import { utils } from "../../../store/utils";
   import type { Project } from "../../../utils/interfaces";
 
   export let project: Project = {} as Project;
 </script>
 
 <div class="mt-4 px-8 text-left">
-  <h1 class="text-3xl font-bold">
-    {project.name}
-  </h1>
+  <div class="flex gap-2">
+    <h1 class="self-center text-3xl font-bold">
+      {project.name}
+    </h1>
+    <div
+      class="mt-2 tooltip tooltip-right tooltip-warning self-center"
+      data-tip="add category"
+    >
+      <button
+        on:click={() => utils.switchCategoryForm()}
+        class="w-8 h-8 p-1 bg-yellow-400 hover:bg-yellow-600 rounded-full"
+        ><FaPlus /></button
+      >
+    </div>
+  </div>
+
   <p class="text-xs">
     {project.description}
   </p>
   <div class="mt-2 flex gap-2">
-    <span class="px-2 bg-blue-200 font-semibold rounded-xl">Website</span>
-    <span class="px-2 bg-green-200 font-semibold rounded-xl">Design</span>
-    <span class="px-2 bg-red-200 font-semibold rounded-xl">Development</span>
+    {#if project.categories !== undefined}
+      {#each project.categories as category}
+        <span class="px-2 bg-blue-200 font-semibold rounded-xl"
+          >{category.title}</span
+        >
+      {/each}
+    {/if}
   </div>
 </div>

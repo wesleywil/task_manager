@@ -1,4 +1,7 @@
 <script lang="ts">
+  import FaTrashAlt from "svelte-icons/fa/FaTrashAlt.svelte";
+  import FaEllipsisH from "svelte-icons/fa/FaEllipsisH.svelte";
+
   import { utils } from "../../../store/utils";
   import type { Task } from "../../../utils/interfaces";
   import TaskDeletePanel from "../task_delete_panel/TaskDeletePanel.svelte";
@@ -30,21 +33,33 @@
     <h1 class="grow ml-8 text-xl font-semibold">
       {task.title}
     </h1>
-    <button on:click={() => switchDeletePanel(task.id)} class="self-center"
-      ><svg
-        fill="red"
-        xmlns="http://www.w3.org/2000/svg"
-        x="0px"
-        y="0px"
-        width="25"
-        height="25"
-        viewBox="0 0 30 30"
+    <!-- DropDown -->
+    <div class="w-4 h-4 mt-2 mx-2 dropdown dropdown-end">
+      <label for="test" tabindex={0} class="text-xl font-bold">
+        <span class="hover:text-red-400"><FaEllipsisH /></span>
+      </label>
+      <ul
+        tabIndex={0}
+        class="dropdown-content w-24 p-2 bg-slate-200 shadow flex flex-col items-center gap-1 rounded-box z-2"
       >
-        <path
-          d="M 13 3 A 1.0001 1.0001 0 0 0 11.986328 4 L 6 4 A 1.0001 1.0001 0 1 0 6 6 L 24 6 A 1.0001 1.0001 0 1 0 24 4 L 18.013672 4 A 1.0001 1.0001 0 0 0 17 3 L 13 3 z M 6 8 L 6 24 C 6 25.105 6.895 26 8 26 L 22 26 C 23.105 26 24 25.105 24 24 L 24 8 L 6 8 z"
-        />
-      </svg></button
-    >
+        <button
+          class="w-full px-2 py-1 bg-yellow-400 hover:bg-yellow-600 rounded"
+          >Tags</button
+        >
+
+        <button
+          on:click={() => switchUpdateTaskForm(task.id)}
+          class="w-full px-2 py-1 bg-green-400 hover:bg-green-600 rounded"
+          >Update</button
+        >
+
+        <button
+          on:click={() => switchDeletePanel(task.id)}
+          class="w-full px-2 py-1 bg-red-400 hover:bg-red-600 rounded"
+          >Delete</button
+        >
+      </ul>
+    </div>
   </div>
 
   <p class="text-slate-600 text-xs">
@@ -57,13 +72,12 @@
 
   <h2 class="text-sm">Due Date: {String(task.due_date).slice(0, 10)}</h2>
   <div>
-    <div>
-      <span class="px-2 font-semibold bg-purple-200">Front-End</span>
+    <div class="flex flex-wrap gap-2">
+      {#if task.tags !== undefined}
+        {#each task.tags as tags}
+          <span class="px-2 font-semibold bg-purple-200">{tags.title}</span>
+        {/each}
+      {/if}
     </div>
   </div>
-  <button
-    on:click={() => switchUpdateTaskForm(task.id)}
-    class="w-full mt-2 text-xl bg-green-400 hover:bg-green-600 text-black font-semibold rounded-xl"
-    >Update</button
-  >
 </div>

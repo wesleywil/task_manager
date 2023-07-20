@@ -7,6 +7,9 @@ export async function GET({ params, request }: { params: { id: number },request:
             where:{
                 projectId:Number(params.id)
             },
+            include:{
+                tags:true,
+            }
             
         })
         return json(tasks)

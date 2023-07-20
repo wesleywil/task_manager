@@ -11,12 +11,15 @@
 
   import { utils } from "../../../../store/utils";
   import { tasks } from "../../../../store/tasks";
+  import CategoryForm from "$lib/components/category_form/CategoryForm.svelte";
 
   export let data: { id: number };
 
   // Store states
   let hideForm = true;
   $: hideForm = $utils.hideTaskForm;
+  let hideCategoryForm = true;
+  $: hideCategoryForm = $utils.hideCategoryForm;
 
   let project: Project = {} as Project;
 
@@ -36,10 +39,17 @@
 {#await project}
   <Loading />
 {:then projectData}
+  <!-- Create/Update Project Form -->
   {#if hideForm}
     <div />
   {:else}
     <TaskForm projectId={projectData.id} />
+  {/if}
+  <!-- Create/Update Project Form -->
+  {#if hideCategoryForm}
+    <div />
+  {:else}
+    <CategoryForm projectId={projectData.id} />
   {/if}
   <div class="w-full h-full text-center">
     <!-- Project Details -->

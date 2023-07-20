@@ -2,21 +2,23 @@ import { writable } from "svelte/store";
 
 export interface Utils {
   hideForm: boolean;
-  hideTaskForm:boolean;
-  hideDeletePanel:boolean;
-  hideDeleteTaskPanel:boolean;
+  hideTaskForm: boolean;
+  hideCategoryForm: boolean;
+  hideDeletePanel: boolean;
+  hideDeleteTaskPanel: boolean;
   projectId: number;
-  taskId:number;
+  taskId: number;
 }
 
 const initStore = () => {
   const initialCounter: Utils = {
     hideForm: true,
-    hideTaskForm:true,
-    hideDeletePanel:true,
-    hideDeleteTaskPanel:true,
+    hideTaskForm: true,
+    hideCategoryForm: true,
+    hideDeletePanel: true,
+    hideDeleteTaskPanel: true,
     projectId: 0,
-    taskId:0,
+    taskId: 0,
   };
 
   const { subscribe, set, update } = writable(initialCounter);
@@ -29,21 +31,26 @@ const initStore = () => {
         projectId: 0,
         hideForm: !hideForm,
       })),
-      switchTaskForm: () =>
+    switchTaskForm: () =>
       update(({ hideTaskForm, ...rest }) => ({
         ...rest,
         hideTaskForm: !hideTaskForm,
       })),
-      switchHideDeletePanel: () =>
+      switchCategoryForm: () =>
+      update(({ hideCategoryForm, ...rest }) => ({
+        ...rest,
+        hideCategoryForm: !hideCategoryForm,
+      })),
+    switchHideDeletePanel: () =>
       update(({ hideDeletePanel, ...rest }) => ({
         ...rest,
         projectId: 0,
         hideDeletePanel: !hideDeletePanel,
       })),
-      switchHideDeleteTaskPanel: () =>
+    switchHideDeleteTaskPanel: () =>
       update(({ hideDeleteTaskPanel, ...rest }) => ({
         ...rest,
-        taskId:0,
+        taskId: 0,
         hideDeleteTaskPanel: !hideDeleteTaskPanel,
       })),
     selectProjectId: (id: number) => {
