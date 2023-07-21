@@ -4,6 +4,7 @@ export interface Utils {
   hideForm: boolean;
   hideTaskForm: boolean;
   hideCategoryForm: boolean;
+  hideTagMenu:boolean;
   hideDeletePanel: boolean;
   hideDeleteTaskPanel: boolean;
   projectId: number;
@@ -15,6 +16,7 @@ const initStore = () => {
     hideForm: true,
     hideTaskForm: true,
     hideCategoryForm: true,
+    hideTagMenu:true,
     hideDeletePanel: true,
     hideDeleteTaskPanel: true,
     projectId: 0,
@@ -40,6 +42,11 @@ const initStore = () => {
       update(({ hideCategoryForm, ...rest }) => ({
         ...rest,
         hideCategoryForm: !hideCategoryForm,
+      })),
+      switchTagMenu: () =>
+      update(({ hideTagMenu, ...rest }) => ({
+        ...rest,
+        hideTagMenu: !hideTagMenu,
       })),
     switchHideDeletePanel: () =>
       update(({ hideDeletePanel, ...rest }) => ({

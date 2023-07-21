@@ -10,7 +10,11 @@ export async function GET({ params }: { params: { id: number } }){
                 id:Number(params.id)
             },
             include:{
-                tasks:true,
+                tasks:{
+                    include:{
+                        tags:true
+                    }
+                },
                 categories:true
             }
         })

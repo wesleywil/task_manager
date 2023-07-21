@@ -3,7 +3,7 @@
 
   import TaskItem from "$lib/components/task_item/TaskItem.svelte";
   import TaskProjectDetails from "$lib/components/task_project_details/TaskProjectDetails.svelte";
-  import TaskForm from "$lib/components/task_form/TaskForm.svelte";
+  import ProjectTaskHiddenForms from "$lib/components/project_task_hidden_forms/ProjectTaskHiddenForms.svelte";
   import Loading from "$lib/components/loading/Loading.svelte";
 
   import type { Project } from "../../../../utils/interfaces";
@@ -11,15 +11,8 @@
 
   import { utils } from "../../../../store/utils";
   import { tasks } from "../../../../store/tasks";
-  import CategoryForm from "$lib/components/category_form/CategoryForm.svelte";
 
   export let data: { id: number };
-
-  // Store states
-  let hideForm = true;
-  $: hideForm = $utils.hideTaskForm;
-  let hideCategoryForm = true;
-  $: hideCategoryForm = $utils.hideCategoryForm;
 
   let project: Project = {} as Project;
 
@@ -39,18 +32,7 @@
 {#await project}
   <Loading />
 {:then projectData}
-  <!-- Create/Update Project Form -->
-  {#if hideForm}
-    <div />
-  {:else}
-    <TaskForm projectId={projectData.id} />
-  {/if}
-  <!-- Create/Update Project Form -->
-  {#if hideCategoryForm}
-    <div />
-  {:else}
-    <CategoryForm projectId={projectData.id} />
-  {/if}
+  <ProjectTaskHiddenForms projectId={projectData.id} />
   <div class="w-full h-full text-center">
     <!-- Project Details -->
     <TaskProjectDetails project={projectData} />

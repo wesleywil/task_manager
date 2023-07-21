@@ -1,5 +1,4 @@
 <script lang="ts">
-  import FaTrashAlt from "svelte-icons/fa/FaTrashAlt.svelte";
   import FaEllipsisH from "svelte-icons/fa/FaEllipsisH.svelte";
 
   import { utils } from "../../../store/utils";
@@ -19,6 +18,11 @@
 
   const switchDeletePanel = (id: number) => {
     utils.switchHideDeleteTaskPanel();
+    utils.selectTaskId(id);
+  };
+
+  const switchTagMenu = (id: number) => {
+    utils.switchTagMenu();
     utils.selectTaskId(id);
   };
 </script>
@@ -43,6 +47,7 @@
         class="dropdown-content w-24 p-2 bg-slate-200 shadow flex flex-col items-center gap-1 rounded-box z-2"
       >
         <button
+          on:click={() => switchTagMenu(task.id)}
           class="w-full px-2 py-1 bg-yellow-400 hover:bg-yellow-600 rounded"
           >Tags</button
         >
@@ -72,7 +77,7 @@
 
   <h2 class="text-sm">Due Date: {String(task.due_date).slice(0, 10)}</h2>
   <div>
-    <div class="flex flex-wrap gap-2">
+    <div class="mt-1 flex flex-wrap justify-center gap-2">
       {#if task.tags !== undefined}
         {#each task.tags as tags}
           <span class="px-2 font-semibold bg-purple-200">{tags.title}</span>
