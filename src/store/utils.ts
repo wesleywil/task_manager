@@ -31,16 +31,21 @@ const initStore = () => {
       update(({ hideForm, ...rest }) => ({
         ...rest,
         projectId: 0,
+        taskId:0,
         hideForm: !hideForm,
       })),
     switchTaskForm: () =>
       update(({ hideTaskForm, ...rest }) => ({
         ...rest,
+        projectId:0,
+        taskId:0,
         hideTaskForm: !hideTaskForm,
       })),
       switchCategoryForm: () =>
       update(({ hideCategoryForm, ...rest }) => ({
         ...rest,
+        projectId:0,
+        taskId:0,
         hideCategoryForm: !hideCategoryForm,
       })),
       switchTagMenu: () =>
