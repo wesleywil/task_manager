@@ -1,5 +1,6 @@
 <script lang="ts">
   import TagForm from "../tag_form/TagForm.svelte";
+  import TagList from "../tag_list/TagList.svelte";
 
   export let projectId: number = 0;
 </script>
@@ -9,6 +10,7 @@
     <h1 class="text-4xl text-white font-bold uppercase">Tags Menu</h1>
     <div class="w-1/2 flex gap-2">
       <TagForm {projectId} />
+      <TagList {projectId} />
     </div>
   </div>
 </div>
