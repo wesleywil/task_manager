@@ -1,32 +1,49 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { signIn, signOut } from "@auth/sveltekit/client";
+  import { page } from "$app/stores";
   import type { Project } from "../../../utils/interfaces";
 
   let projects: Project[] = [];
+
   onMount(async () => {
     const res = await fetch("http://localhost:5173/api/projects", {
       cache: "no-cache",
     });
     projects = await res.json();
   });
+  console.log("SESSION=> ", $page.data.session);
 </script>
 
 <div class="h-full w-48 px-4 py-2 bg-black text-slate-400">
   <div class="h-full flex flex-col items-center justify-between">
     <div class=" flex flex-col gap-12">
       <!-- User Info -->
-      <div class="flex flex-col">
-        <div class="mt-12 h-24 w-24 bg-white rounded-full" />
-        <div class="mt-2 flex flex-col gap-2">
+      <div class="flex flex-col gap-2">
+        {#if $page.data.session && Object.keys($page.data.session).length}
+          {#if $page.data.session.user?.image}
+            <img
+              src={$page.data.session.user.image}
+              alt="profile"
+              class="mt-12 mx-auto h-24 w-24 rounded-full"
+            />
+          {/if}
           <button
             class="bg-slate-100 hover:bg-slate-300 font-semibold text-black rounded"
             >Profile</button
           >
           <button
+            on:click={() => signOut()}
             class="bg-slate-100 hover:bg-slate-300 font-semibold text-black rounded"
             >Sign Out</button
           >
-        </div>
+        {:else}
+          <button
+            on:click={() => signIn("google")}
+            class="bg-slate-100 hover:bg-slate-300 font-semibold text-black rounded"
+            >SignIn</button
+          >
+        {/if}
       </div>
       <!-- Favorites -->
       <div class="flex flex-col gap-4">

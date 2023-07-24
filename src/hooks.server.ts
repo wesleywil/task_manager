@@ -8,5 +8,12 @@ export const handle = SvelteKitAuth({
 adapter:PrismaAdapter(prisma),
   providers: [Google({ clientId: GOOGLE_ID, clientSecret: GOOGLE_SECRET })],
   secret:AUTH_SECRET,
-  
+  callbacks:{
+    async session({session, user}){
+        if(session.user){
+            session.user.id = user.id;
+        }
+        return Promise.resolve(session)
+    }
+}
 });

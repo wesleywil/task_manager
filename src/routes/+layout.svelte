@@ -1,4 +1,6 @@
-<script>
+<script lang="ts">
+  import type { LayoutData } from "./$types";
+
   import Menu from "../lib/components/menu/Menu.svelte";
 
   import "../app.css";
