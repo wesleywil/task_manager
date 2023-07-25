@@ -1,16 +1,24 @@
-import { goto } from "$app/navigation";
-import { json, fail, redirect } from "@sveltejs/kit";
+import { json } from "@sveltejs/kit";
 import prisma from "../../../../prisma/client";
 import { boolenify } from "../../../utils/utils";
+import type { RequestEvent } from "./$types.js";
 
-export async function GET() {
+export async function GET({locals:{getSession}}) {
+  const session = await getSession();
   try {
-    const projects = await prisma.project.findMany({
-      include: {
-        tasks: true,
-      },
-    });
-    return json(projects);
+    if(session){
+      const projects = await prisma.project.findMany({
+        where:{
+          userId:session.user.id
+        },
+        include: {
+          tasks: true,
+        },
+      });
+      return json(projects);
+    }
+    return json({message:"You're not authorized to do this action"},{status:401})
+    
   } catch (error) {
     return json(
       { message: "An server error has occurred", error: error },
@@ -19,7 +27,8 @@ export async function GET() {
   }
 }
 
-export async function POST({ request }) {
+export async function POST({request, locals:{getSession}}) {
+  const session = await getSession();
   const formData = await request.formData();
 
   const fields = ["name", "description", "status", "priority", "favorite" ,"due_date"];
@@ -34,18 +43,23 @@ export async function POST({ request }) {
   const formattedDueDate = date.toISOString();
   
   try {
-    await prisma.project.create({
-      data: {
-        name,
-        description,
-        status,
-        priority,
-        favorite:boolenify(favorite),
-        start_date: new Date(),
-        due_date:formattedDueDate,
-      },
-    });
-    return Response.redirect("http://localhost:5173/projects")
+    if(session){
+      await prisma.project.create({
+        data: {
+          name,
+          description,
+          status,
+          priority,
+          favorite:boolenify(favorite),
+          start_date: new Date(),
+          due_date:formattedDueDate,
+          userId:session.user.id
+        },
+      });
+      return Response.redirect("http://localhost:5173/projects")
+    }
+      return json({message:"You're not authorized to do this action"},{status:401})
+    
   } catch (error: any) {
     return json(
       { message: "An server error has occurred", error: error.message },

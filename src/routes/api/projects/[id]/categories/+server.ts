@@ -1,21 +1,19 @@
 import { json } from "@sveltejs/kit";
 import prisma from "../../../../../../prisma/client";
 
-export async function GET({
-  params,
-  request,
-}: {
-  params: { id: number };
-  request: Request;
-}){
-  try{
-    const categories = await prisma.category.findMany({
-      where:{
-        projectId:Number(params.id)
-      }
-    })
-    return json(categories)
-  }catch (error: any) {
+export async function GET({ request, params: { id }, locals: { getSession } }) {
+  const session = await getSession();
+  try {
+    if (session) {
+      const categories = await prisma.category.findMany({
+        where: {
+          projectId: Number(id),
+        },
+      });
+      return json(categories);
+    }
+    return json({ message: "Unauthorized" }, { status: 401 });
+  } catch (error: any) {
     return json(
       { message: "An server error has occurred", error: error.message },
       { status: 500 }
@@ -23,14 +21,12 @@ export async function GET({
   }
 }
 
-
 export async function POST({
-  params,
   request,
-}: {
-  params: { id: number };
-  request: Request;
+  params: { id },
+  locals: { getSession },
 }) {
+  const session = await getSession();
   const formData = await request.formData();
 
   const fields = ["title", "description"];
@@ -42,16 +38,17 @@ export async function POST({
 
   const { title, description } = formDataValues;
   try {
-    await prisma.category.create({
-      data: {
-        title,
-        description,
-        projectId: Number(params.id),
-      },
-    });
-    return Response.redirect(
-      `http://localhost:5173/projects/${params.id}/tasks`
-    );
+    if (session) {
+      await prisma.category.create({
+        data: {
+          title,
+          description,
+          projectId: Number(id),
+        },
+      });
+      return Response.redirect(`http://localhost:5173/projects/${id}/tasks`);
+    }
+    return json({ message: "Unauthorized" }, { status: 401 });
   } catch (error: any) {
     return json(
       { message: "An server error has occurred", error: error.message },

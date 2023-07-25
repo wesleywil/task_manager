@@ -1,18 +1,22 @@
 import { json } from "@sveltejs/kit";
 import prisma from "../../../../../../prisma/client";
 
-export async function GET({ params, request }: { params: { id: number },request:Request }){
+export async function GET({request, params:{id}, locals:{getSession}}){
+    const session = await getSession();
     try{
-        const tasks = await prisma.task.findFirst({
-            where:{
-                projectId:Number(params.id)
-            },
-            include:{
-                tags:true,
-            }
-            
-        })
-        return json(tasks)
+        if(session){
+            const tasks = await prisma.task.findFirst({
+                where:{
+                    projectId:Number(id)
+                },
+                include:{
+                    tags:true,
+                }
+                
+            })
+            return json(tasks)
+        }
+        return json({ message: "Unauthorized" }, { status: 401 });
     }catch(error:any){
         return json(
             { message: "An server error has occurred", error: error.message },
@@ -21,7 +25,8 @@ export async function GET({ params, request }: { params: { id: number },request:
     }
 }
 
-export async function POST({ params, request }: { params: { id: number },request:Request }){
+export async function POST({request, params:{id}, locals:{getSession}}){
+    const session = await getSession();
     const formData = await request.formData();
 
     const fields = ["title", "description", "status", "priority", "due_date"];
@@ -36,17 +41,20 @@ export async function POST({ params, request }: { params: { id: number },request
     const formattedDueDate = date.toISOString();
 
     try{
-        await prisma.task.create({
-            data:{
-                title,
-                description,
-                status,
-                priority,
-                due_date:formattedDueDate,
-                projectId:Number(params.id)
-            }
-        });
-        return Response.redirect(`http://localhost:5173/projects/${params.id}/tasks`)
+        if(session){
+            await prisma.task.create({
+                data:{
+                    title,
+                    description,
+                    status,
+                    priority,
+                    due_date:formattedDueDate,
+                    projectId:Number(id)
+                }
+            });
+            return Response.redirect(`http://localhost:5173/projects/${id}/tasks`)
+        }
+        return json({ message: "Unauthorized" }, { status: 401 });
     }catch(error:any){
         return json(
             { message: "An server error has occurred", error: error.message },

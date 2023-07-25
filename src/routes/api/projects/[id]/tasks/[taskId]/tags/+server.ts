@@ -2,20 +2,21 @@ import { json } from "@sveltejs/kit";
 import prisma from "../../../../../../../../prisma/client";
 
 export async function GET({
-  params,
   request,
-}: {
-  params: { id: number, taskId:number };
-  request: Request;
-}){
-  try{
-    const tags = await prisma.tag.findMany({
-      where:{
-        taskId:Number(params.taskId)
-      }
-    })
-    return json(tags)
-  }catch (error: any) {
+  params: { id, taskId },
+  locals: { getSession },
+}) {
+  const session = await getSession();
+  try {
+    if (session) {
+      const tags = await prisma.tag.findMany({
+        where: {
+          taskId: Number(taskId),
+        },
+      });
+      return json(tags);
+    }
+  } catch (error: any) {
     return json(
       { message: "An server error has occurred", error: error.message },
       { status: 500 }
@@ -23,14 +24,12 @@ export async function GET({
   }
 }
 
-
 export async function POST({
-  params,
   request,
-}: {
-  params: { id: number, taskId:number };
-  request: Request;
+  params: { taskId, id },
+  locals: { getSession },
 }) {
+  const session = await getSession();
   const formData = await request.formData();
 
   const fields = ["title", "description"];
@@ -42,16 +41,17 @@ export async function POST({
 
   const { title, description } = formDataValues;
   try {
-    await prisma.tag.create({
-      data: {
-        title,
-        description,
-        taskId: Number(params.taskId),
-      },
-    });
-    return Response.redirect(
-      `http://localhost:5173/projects/${params.id}/tasks`
-    );
+    if (session) {
+      await prisma.tag.create({
+        data: {
+          title,
+          description,
+          taskId: Number(taskId),
+        },
+      });
+      return Response.redirect(`http://localhost:5173/projects/${id}/tasks`);
+    }
+    return json({ message: "Unauthorized" }, { status: 401 });
   } catch (error: any) {
     return json(
       { message: "An server error has occurred", error: error.message },
