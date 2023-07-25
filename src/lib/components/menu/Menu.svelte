@@ -12,7 +12,6 @@
     });
     projects = await res.json();
   });
-  console.log("SESSION=> ", $page.data.session);
 </script>
 
 <div class="h-full w-48 px-4 py-2 bg-black text-slate-400">
@@ -25,8 +24,10 @@
             <img
               src={$page.data.session.user.image}
               alt="profile"
-              class="mt-12 mx-auto h-24 w-24 rounded-full"
+              class="mt-4 mx-auto h-24 w-24 rounded-full"
             />
+          {:else}
+            <div class="mt-4 mx-auto h-24 w-24 rounded-full" />
           {/if}
           <button
             class="bg-slate-100 hover:bg-slate-300 font-semibold text-black rounded"
@@ -38,6 +39,7 @@
             >Sign Out</button
           >
         {:else}
+          <div class="mt-4 mx-auto h-24 w-24 bg-slate-100 rounded-full" />
           <button
             on:click={() => signIn("google")}
             class="bg-slate-100 hover:bg-slate-300 font-semibold text-black rounded"
