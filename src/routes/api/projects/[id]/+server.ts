@@ -3,19 +3,13 @@ import type { RequestEvent } from "../$types";
 import prisma from "../../../../../prisma/client";
 import { boolenify } from "../../../../utils/utils";
 
-export async function GET({
-  params,
-  event,
-}: {
-  params: { id: number };
-  event: RequestEvent;
-}) {
-  const session = await event.locals.getSession();
+export async function GET({request, params:{id}, locals:{getSession}}) {
+  const session = await getSession();
   try {
     if (session) {
       const project = await prisma.project.findFirst({
         where: {
-          id: Number(params.id),
+          id: Number(id),
           userId: session.user.id,
         },
         include: {
