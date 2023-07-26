@@ -53,11 +53,10 @@
             >{project.status}</span
           ></td
         >
-        <td class="px-2"
-          >{String(project.start_date).slice(0, 10)} --- {String(
-            project.due_date
-          ).slice(0, 10)}</td
-        >
+        <td class="px-2 flex flex-col border-0">
+          <span>{String(project.start_date).slice(0, 10)}</span>
+          <span>{String(project.due_date).slice(0, 10)}</span>
+        </td>
         <td
           ><span class="px-2 text-red-600 font-bold">{project.priority}</span
           ></td

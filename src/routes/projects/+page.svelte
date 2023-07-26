@@ -1,11 +1,12 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+  import { utils } from "../../store/utils";
+  import { projects as projectStore } from "../../store/projects";
+
   import ProjectDeletePanel from "$lib/components/project_delete_panel/ProjectDeletePanel.svelte";
   import ProjectForm from "$lib/components/project_form/ProjectForm.svelte";
   import ProjectItem from "$lib/components/project_item/ProjectItem.svelte";
   import ProjectTable from "$lib/components/project_table/ProjectTable.svelte";
-  import { utils } from "../../store/utils";
-  import { projects as projectStore } from "../../store/projects";
-  import type { Project } from "@prisma/client";
   import Loading from "$lib/components/loading/Loading.svelte";
 
   const switchHideForm = () => utils.switchHideForm();
@@ -14,14 +15,15 @@
   let hideDeletePanel = true;
   $: hideDeletePanel = $utils.hideDeletePanel;
 
-  async function getProjects() {
+  let projects: any[] = [];
+
+  onMount(async () => {
     const res = await fetch("http://localhost:5173/api/projects", {
       cache: "no-cache",
     });
-    const projects: any[] = await res.json();
+    projects = await res.json();
     projectStore.setProjects(projects);
-    return projects;
-  }
+  });
 
   let searchValue: string = "";
 
@@ -36,7 +38,7 @@
   }
 </script>
 
-{#await getProjects()}
+{#await projects}
   <Loading />
 {:then projects}
   {#if hideForm}
@@ -50,8 +52,10 @@
     <!-- Favorites -->
     <h2 class="px-8 text-left text-2xl">Favorites</h2>
     <div class="w-full p-8 flex gap-4 flex-wrap">
-      {#each projects as project}
-        <ProjectItem name={project.name} tasks={[]} />
+      {#each projects.slice(0, 5) as project}
+        {#if project.favorite}
+          <ProjectItem name={project.name} tasks={project.tasks} />
+        {/if}
       {/each}
     </div>
     <!-- All Projects -->
