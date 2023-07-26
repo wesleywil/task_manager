@@ -3,6 +3,7 @@
   import { signIn, signOut } from "@auth/sveltekit/client";
   import { page } from "$app/stores";
   import type { Project } from "../../../utils/interfaces";
+  import NewProjectBtn from "../new_project_btn/NewProjectBtn.svelte";
 
   let projects: Project[] = [];
 
@@ -88,9 +89,10 @@
     </div>
 
     <!-- New Project -->
-    <button
+    <NewProjectBtn />
+    <!-- <button
       class="w-11/12 py-1 bg-white hover:bg-slate-300 text-black font-bold rounded"
       >+ New Project</button
-    >
+    > -->
   </div>
 </div>
