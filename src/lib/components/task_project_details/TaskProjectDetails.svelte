@@ -3,6 +3,7 @@
 
   import { utils } from "../../../store/utils";
   import type { Project } from "../../../utils/interfaces";
+  import ProjectCategoryItem from "../project_category_item/ProjectCategoryItem.svelte";
 
   export let project: Project = {} as Project;
 </script>
@@ -30,9 +31,7 @@
   <div class="mt-2 flex gap-2">
     {#if project.categories !== undefined}
       {#each project.categories as category}
-        <span class="px-2 bg-blue-200 font-semibold rounded-xl"
-          >{category.title}</span
-        >
+        <ProjectCategoryItem {category} />
       {/each}
     {/if}
   </div>
