@@ -39,11 +39,11 @@
     </h1>
     <!-- DropDown -->
     <div class="w-4 h-4 mt-2 mx-2 dropdown dropdown-end">
-      <label for="test" tabindex={0} class="text-xl font-bold">
+      <label for="test" tabindex="-1" class="text-xl font-bold">
         <span class="hover:text-red-400"><FaEllipsisH /></span>
       </label>
       <ul
-        tabIndex={0}
+        tabIndex="-1"
         class="dropdown-content w-24 p-2 bg-slate-200 shadow flex flex-col items-center gap-1 rounded-box z-2"
       >
         <button
