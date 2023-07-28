@@ -80,7 +80,10 @@
     <div class="mt-1 flex flex-wrap justify-center gap-2">
       {#if task.tags !== undefined}
         {#each task.tags as tags}
-          <span class="px-2 font-semibold bg-purple-200">{tags.title}</span>
+          <span
+            style={`background-color:${tags.bgColor}; color:${tags.textColor}`}
+            class="px-2 font-semibold rounded">{tags.title}</span
+          >
         {/each}
       {/if}
     </div>

@@ -17,7 +17,8 @@
 </script>
 
 <div
-  class="px-2 py-1 flex justify-center items-center gap-2 bg-blue-200 font-semibold rounded-xl"
+  style={`background-color:${category.bgColor}; color:${category.textColor}`}
+  class="px-2 py-1 flex justify-center items-center gap-2 font-semibold rounded-xl"
 >
   <span class="self-center">{category.title}</span>
   <div class="self-center h-4 w-4">
