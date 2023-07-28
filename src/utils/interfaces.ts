@@ -26,6 +26,8 @@ export interface Tag {
   id: number;
   title: string;
   description?: string;
+  textColor:string;
+  bgColor:string;
   taskId: number;
 }
 
@@ -33,6 +35,8 @@ export interface Category {
   id: number;
   title: string;
   description?: string;
+  textColor:string;
+  bgColor:string;
   projectId: number;
 }
 

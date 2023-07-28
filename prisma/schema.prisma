@@ -87,6 +87,8 @@ model Tag {
   id          Int     @id @default(autoincrement())
   title       String
   description String? @db.Text()
+  textColor   String  @default("white")
+  bgColor     String  @default("black")
   taskId      Int
   task        Task    @relation(fields: [taskId], references: [id])
 }
@@ -95,6 +97,8 @@ model Category {
   id          Int     @id @default(autoincrement())
   title       String
   description String? @db.Text()
+  textColor   String  @default("white")
+  bgColor     String  @default("black")
   projectId   Int
   project     Project @relation(fields: [projectId], references: [id])
 }
