@@ -32,19 +32,21 @@ export async function POST({
   const session = await getSession();
   const formData = await request.formData();
 
-  const fields = ["title", "description"];
+  const fields = ["title", "textColor","bgColor", "description"];
   const formDataValues = {} as any;
 
   for (const field of fields) {
     formDataValues[field] = formData.get(field);
   }
 
-  const { title, description } = formDataValues;
+  const { title, textColor, bgColor, description } = formDataValues;
   try {
     if (session) {
       await prisma.tag.create({
         data: {
           title,
+          textColor,
+          bgColor,
           description,
           taskId: Number(taskId),
         },

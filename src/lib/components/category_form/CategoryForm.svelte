@@ -17,7 +17,16 @@
         placeholder="Project's Name"
         class="w-2/3 px-2 py-1 rounded"
       />
-
+      <div class="w-2/3 px-2 py-1 flex gap-4 bg-white rounded">
+        <div class="flex flex-col items-center justify-center">
+          <span class="text-gray-500">Text Color</span>
+          <input type="color" name="textColor" />
+        </div>
+        <div class="flex flex-col items-center justify-center">
+          <span class="text-gray-500">Background Color</span>
+          <input type="color" name="bgColor" />
+        </div>
+      </div>
       <textarea
         rows="5"
         name="description"
