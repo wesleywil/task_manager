@@ -6,6 +6,10 @@
   import "../app.css";
 </script>
 
+<svelte:head>
+  <title>Task Manager</title>
+</svelte:head>
+
 <div class="w-full h-[100vh] flex bg-orange-100">
   <Menu />
   <slot />
