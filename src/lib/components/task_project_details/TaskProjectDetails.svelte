@@ -8,7 +8,7 @@
   export let project: Project = {} as Project;
 </script>
 
-<div class="mt-4 px-8 text-left">
+<div class="mt-4 px-8 text-left text-[#111e20]">
   <div class="flex gap-2">
     <h1 class="self-center text-3xl font-bold">
       {project.name}
@@ -19,7 +19,7 @@
     >
       <button
         on:click={() => utils.switchCategoryForm()}
-        class="w-8 h-8 p-1 bg-yellow-400 hover:bg-yellow-600 rounded-full"
+        class="w-8 h-8 p-1 bg-[#7bc243] hover:bg-green-600 rounded-full"
         ><FaPlus /></button
       >
     </div>

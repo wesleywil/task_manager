@@ -11,7 +11,7 @@
 <form
   method="POST"
   action={`/api/projects/${task.projectId}/tasks/${taskId}/update`}
-  class="w-1/2 p-2 py-4 font-semibold flex flex-col gap-4 items-center justify-center bg-slate-700 border border-white rounded"
+  class="w-1/2 p-2 py-4 font-semibold flex flex-col gap-4 items-center justify-center bg-[#111e20] border border-[#7bc243] rounded"
 >
   <input
     type="text"
@@ -55,13 +55,13 @@
   />
   <div class="flex justify-center gap-4">
     <button
-      class="px-2 py-1 bg-black hover:bg-slate-900 text-white text-xl font-semibold rounded"
+      class="px-2 py-1 bg-[#7bc243] hover:bg-[#7bc243]/60 text-[#111e20] text-xl font-semibold rounded"
       >Submit</button
     >
     <button
       type="button"
       on:click={() => utils.switchTaskForm()}
-      class="px-2 py-1 bg-black hover:bg-slate-900 text-white text-xl font-semibold rounded"
+      class="px-2 py-1 bg-[#7bc243] hover:bg-[#7bc243]/60 text-[#111e20] text-xl font-semibold rounded"
       >Cancel</button
     >
   </div>

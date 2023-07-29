@@ -22,7 +22,9 @@
   });
 </script>
 
-<div class="w-full h-full flex flex-col items-center text-center">
+<div
+  class="w-full h-full flex flex-col items-center text-[#111e20] text-center"
+>
   <div class="w-1/2 mt-24 flex flex-col gap-2">
     <h1 class="text-4xl font-bold">Profile</h1>
     <div class="mt-4 flex flex-col items-center">
@@ -40,17 +42,17 @@
         <h2 class="text-xs">{$page.data.session.user.email}</h2>
         <h1 class="xl:w-1/2 mt-8 text-3xl text-left font-semibold">Totals</h1>
         <div
-          class="xl:w-1/2 mt-1 p-4 flex flex-col gap-2 text-2xl text-white bg-black rounded"
+          class="xl:w-1/2 mt-1 p-4 flex flex-col gap-2 text-2xl text-[#ebf0f2] bg-[#111e20] rounded"
         >
-          <div class="px-2 flex items-start border border-orange-200 rounded">
-            <h1 class="grow text-left">Projects</h1>
-            <h1 class="p-1 pl-2 text-right border-l border-orange-200">
+          <div class="px-2 flex items-start border border-[#7bc243] rounded">
+            <h1 class="grow pr-2 text-left">Projects</h1>
+            <h1 class="p-1 pl-2 text-right border-l border-[#7bc243]">
               {projects.length}
             </h1>
           </div>
-          <div class="px-2 flex items-start border border-orange-200 rounded">
-            <h1 class="grow text-left">Tasks</h1>
-            <h1 class="p-1 pl-2 text-right border-l border-orange-200">
+          <div class="px-2 flex items-start border border-[#7bc243] rounded">
+            <h1 class="grow pr-2 text-left">Tasks</h1>
+            <h1 class="p-1 pl-2 text-right border-l border-[#7bc243]">
               {totalTaskCount}
             </h1>
           </div>

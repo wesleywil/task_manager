@@ -47,7 +47,7 @@
     <ProjectForm />
   {/if}
 
-  <div class="w-full h-full text-center z-0">
+  <div class="w-full h-full text-center text-[#111e20] z-0">
     <h1 class="mt-24 mb-8 text-6xl font-bold">PROJECTS</h1>
     <!-- Favorites -->
     <h2 class="px-8 text-left text-2xl">Favorites</h2>
@@ -64,18 +64,19 @@
       <div class="flex">
         <button
           on:click={switchHideForm}
-          class="mr-4 px-2 py-1 text-xl font-bold text-white bg-red-400 hover:bg-red-600 rounded"
+          class="mr-4 px-2 py-1 text-xl font-bold text-white bg-[#7bc243] hover:bg-green-600 rounded"
           >+</button
         >
         <input
           type="text"
           on:change={handleChange}
           placeholder="Search Project"
-          class="w-1/3 px-2 py-1 rounded-l"
+          class="w-1/3 px-2 py-1 outline-0 rounded-l"
         />
         <button
           on:click={handleSearch}
-          class="bg-black text-white px-2 py-1 rounded-r">Search</button
+          class="bg-[#7bc243] text-black font-semibold px-2 py-1 rounded-r"
+          >Search</button
         >
       </div>
       <!-- Project List Table -->

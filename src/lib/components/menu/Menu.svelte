@@ -15,7 +15,7 @@
   });
 </script>
 
-<div class="h-full w-48 px-4 py-2 bg-black text-slate-400">
+<div class="h-full w-48 px-4 py-2 bg-[#111e20] text-[#ebf0f2]">
   <div class="h-full flex flex-col items-center justify-between">
     <div class=" flex flex-col gap-12">
       <!-- User Info -->
@@ -25,25 +25,30 @@
             <img
               src={$page.data.session.user.image}
               alt="profile"
-              class="mt-4 mx-auto h-24 w-24 rounded-full"
+              class="mt-4 mx-auto md:h-20 xl:h-24 md:h-20 xl:w-24 rounded-full"
             />
           {:else}
-            <div class="mt-4 mx-auto h-24 w-24 rounded-full" />
+            <div
+              class="mt-4 mx-auto md:h-20 xl:h-24 md:h-20 xl:w-24 rounded-full"
+            />
           {/if}
-          <button
-            class="bg-slate-100 hover:bg-slate-300 font-semibold text-black rounded"
-            >Profile</button
+          <a
+            href="/profile"
+            class=" bg-[#ebf0f2] hover:bg-slate-300 font-semibold text-center text-[#111e20] rounded transition duration-300 ease-in-out"
+            >Profile</a
           >
           <button
             on:click={() => signOut()}
-            class="bg-slate-100 hover:bg-slate-300 font-semibold text-black rounded"
+            class="bg-[#ebf0f2] hover:bg-slate-300 font-semibold text-[#111e20] rounded transition duration-300 ease-in-out"
             >Sign Out</button
           >
         {:else}
-          <div class="mt-4 mx-auto h-24 w-24 bg-slate-100 rounded-full" />
+          <div
+            class="mt-4 mx-auto md:h-20 xl:h-24 md:h-20 xl:w-24 bg-[#ebf0f2] rounded-full"
+          />
           <button
             on:click={() => signIn("google")}
-            class="bg-slate-100 hover:bg-slate-300 font-semibold text-black rounded"
+            class="bg-[#ebf0f2] hover:bg-slate-300 font-semibold text-[#111e20] rounded transition duration-300 ease-in-out"
             >SignIn</button
           >
         {/if}
@@ -58,8 +63,11 @@
             {#each projects as project}
               {#if project.favorite}
                 <div class="flex gap-2 items-center">
-                  <span class="bg-red-400 w-3 h-3 rounded-full" />
-                  <a href={`/projects/${project.id}/tasks`} target="_self"
+                  <span class="mt-1 bg-[#7bc243] w-3 h-3 rounded-full" />
+                  <a
+                    href={`/projects/${project.id}/tasks`}
+                    target="_self"
+                    class="hover:text-[#7bc243]/80 transition duration-300 ease-in-out"
                     >{project.name}</a
                   >
                 </div>
@@ -70,15 +78,22 @@
       </div>
       <!-- All projects -->
       <div class="flex flex-col gap-4">
-        <a href="/projects" class="text-xl font-semibold">All Projects</a>
+        <a
+          href="/projects"
+          class="text-xl font-semibold hover:text-[#7bc243] transition duration-700 ease-in-out"
+          >All Projects</a
+        >
         <div class="flex flex-col gap-2">
           {#await projects}
             <h2>Loading...</h2>
           {:then projects}
             {#each projects as project}
               <div class="flex gap-2 items-center">
-                <span class="bg-slate-300 w-3 h-3 rounded-full" />
-                <a href={`/projects/${project.id}/tasks`} target="_self"
+                <span class="bg-[#ebf0f2] mt-1 w-3 h-3 rounded-full" />
+                <a
+                  href={`/projects/${project.id}/tasks`}
+                  target="_self"
+                  class="hover:text-[#7bc243]/80 transition duration-300 ease-in-out"
                   >{project.name}</a
                 >
               </div>
@@ -88,11 +103,6 @@
       </div>
     </div>
 
-    <!-- New Project -->
     <NewProjectBtn />
-    <!-- <button
-      class="w-11/12 py-1 bg-white hover:bg-slate-300 text-black font-bold rounded"
-      >+ New Project</button
-    > -->
   </div>
 </div>

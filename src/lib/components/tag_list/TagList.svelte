@@ -31,19 +31,19 @@
 </script>
 
 <div
-  class="w-full flex flex-col items-center bg-slate-700 border border-white rounded"
+  class="w-full flex flex-col items-center bg-[#111e20] border border-[#7bc243] rounded"
 >
   <h1 class="mb-4 text-3xl text-white font-semibold">Tags</h1>
   <div class="flex flex-wrap gap-2 justify-center">
     {#if task.tags !== undefined}
       {#each task.tags as tags}
         <div
-          class="p-2 flex gap-4 items-center bg-red-400 text-white font-semibold rounded"
+          class="p-2 flex gap-4 items-center bg-[#7bc243] text-[#111e20 ] font-semibold rounded"
         >
           <h1>{tags.title}</h1>
           <button
             on:click={() => handleTagDelete(tags.id)}
-            class="w-6 h-6 p-1 bg-white text-red-400 hover:text-red-600 rounded"
+            class="w-6 h-6 p-1 bg-[#111e20] text-red-400 hover:text-red-600 rounded"
             ><FaTrashAlt /></button
           >
         </div>

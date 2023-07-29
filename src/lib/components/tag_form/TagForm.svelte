@@ -8,7 +8,7 @@
 </script>
 
 <div
-  class="w-full flex flex-col items-center justify-center bg-slate-700 border border-white rounded"
+  class="w-full flex flex-col items-center justify-center bg-[#111e20] border border-[#7bc243] rounded"
 >
   <h1 class="text-3xl text-white font-semibold">New Tag</h1>
   <form
@@ -40,12 +40,13 @@
     />
     <div class="flex justify-center gap-4">
       <button
-        class="px-2 py-1 bg-black hover:bg-slate-900 text-white text-xl font-semibold rounded"
+        class="px-2 py-1 bg-[#7bc243] hover:bg-[#7bc243]/60 text-[#111e20] text-xl font-semibold rounded"
         >Submit</button
       >
       <button
         type="button"
-        class="px-2 py-1 bg-black hover:bg-slate-900 text-white text-xl font-semibold rounded"
+        on:click={() => utils.switchTagMenu()}
+        class="px-2 py-1 bg-[#7bc243] hover:bg-[#7bc243]/60 text-[#111e20] text-xl font-semibold rounded"
         >Cancel</button
       >
     </div>

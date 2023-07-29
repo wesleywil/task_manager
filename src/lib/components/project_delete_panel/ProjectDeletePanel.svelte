@@ -15,18 +15,20 @@
   }
 </script>
 
-<div class="w-fit py-1 px-2 bg-black flex gap-4 rounded">
-  <h1 class="font-semibold text-red-600">
+<div class="w-fit py-1 px-2 bg-[#111e20] flex gap-4 rounded">
+  <h1 class="font-semibold text-[#7bc243]">
     Are you sure you want to delete this project - {projectId}?
   </h1>
-  <div class="flex justify-center gap-1 font-bold">
+  <div class="flex justify-center gap-4 font-bold">
     <button
       on:click={() => deleteProject(projectId)}
-      class="px-1 bg-red-400 hover:bg-red-600 rounded">Yes</button
-    >/
+      class="px-1 text-[#ebf0f2] bg-red-500 hover:bg-red-700 rounded"
+      >Yes</button
+    >
     <button
       on:click={hidePanel}
-      class="px-1 bg-green-400 hover:bg-green-600 rounded">No</button
+      class="px-1 text-[#111e20] bg-[#7bc243] hover:bg-green-600 rounded"
+      >No</button
     >
   </div>
 </div>

@@ -10,7 +10,7 @@
   <title>Task Manager</title>
 </svelte:head>
 
-<div class="w-full h-[100vh] flex bg-orange-100">
+<div class="w-full h-[100vh] flex bg-[#ebf0f2]">
   <Menu />
   <slot />
 </div>

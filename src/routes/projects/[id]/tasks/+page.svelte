@@ -38,7 +38,7 @@
     <TaskProjectDetails project={projectData} />
     <h1 class="mt-8 px-8 text-2xl text-left">Tasks</h1>
     <div class="mt-1 px-8 flex gap-8">
-      <div class="w-[20vw] p-1 flex flex-col border border-black rounded">
+      <div class="w-[20vw] p-1 flex flex-col border border-[#111e20] rounded">
         <h1 class="font-semibold">
           To Do
           <span class="px-2 bg-yellow-500 text-white rounded-full">6</span>
@@ -47,7 +47,7 @@
           on:click={() => {
             switchHideForm(Task_Status.TO_DO);
           }}
-          class="w-full mt-1 text-3xl font-bold bg-white hover:bg-slate-200 rounded"
+          class="w-full mt-1 text-3xl font-bold bg-white hover:bg-[#7bc243]/20 rounded"
           >+</button
         >
         <div class="h-[70vh] mt-4 flex flex-col gap-2 overflow-y-auto">
@@ -60,7 +60,7 @@
           {/if}
         </div>
       </div>
-      <div class="w-[20vw] p-1 flex flex-col border border-black rounded">
+      <div class="w-[20vw] p-1 flex flex-col border border-[#111e20] rounded">
         <h1 class="font-semibold">
           In Progress <span class="px-2 bg-blue-500 text-white rounded-full"
             >6</span
@@ -70,7 +70,7 @@
           on:click={() => {
             switchHideForm(Task_Status.IN_PROGRESS);
           }}
-          class="w-full mt-1 text-3xl font-bold bg-white hover:bg-slate-200 rounded"
+          class="w-full mt-1 text-3xl font-bold bg-white hover:bg-[#7bc243]/20 rounded"
           >+</button
         >
         <div class="h-[70vh] mt-4 flex flex-col gap-2 overflow-y-auto">
@@ -83,7 +83,7 @@
           {/if}
         </div>
       </div>
-      <div class="w-[20vw] p-1 flex flex-col border border-black rounded">
+      <div class="w-[20vw] p-1 flex flex-col border border-[#111e20] rounded">
         <h1 class="font-semibold">
           Completed <span class="px-2 bg-green-500 text-white rounded-full"
             >3</span
@@ -93,7 +93,7 @@
           on:click={() => {
             switchHideForm(Task_Status.COMPLETED);
           }}
-          class="w-full mt-1 text-3xl font-bold bg-white hover:bg-slate-200 rounded"
+          class="w-full mt-1 text-3xl font-bold bg-white hover:bg-[#7bc243]/20 rounded"
           >+</button
         >
         <div class="h-[70vh] mt-4 flex flex-col gap-2 overflow-y-auto">
@@ -106,7 +106,7 @@
           {/if}
         </div>
       </div>
-      <div class="w-[20vw] p-1 flex flex-col border border-black rounded">
+      <div class="w-[20vw] p-1 flex flex-col border border-[#111e20] rounded">
         <h1 class="font-semibold">
           Blocked <span class="px-2 bg-red-500 text-white rounded-full">12</span
           >
@@ -115,7 +115,7 @@
           on:click={() => {
             switchHideForm(Task_Status.BLOCKED);
           }}
-          class="w-full mt-1 text-3xl font-bold bg-white hover:bg-slate-200 rounded"
+          class="w-full mt-1 text-3xl font-bold bg-white hover:bg-[#7bc243]/20 rounded"
           >+</button
         >
         <div class="h-[70vh] mt-4 flex flex-col gap-2 overflow-y-auto">
