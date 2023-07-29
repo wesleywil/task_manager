@@ -13,6 +13,7 @@ export async function GET({locals:{getSession}}) {
         },
         include: {
           tasks: true,
+          categories:true,
         },
       });
       return json(projects);
