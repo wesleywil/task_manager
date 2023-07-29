@@ -11,3 +11,6 @@ vite.config.ts.timestamp-*
 
 # Prisma Migrations
 prisma/migrations
+
+# Helper text
+helper.txt
