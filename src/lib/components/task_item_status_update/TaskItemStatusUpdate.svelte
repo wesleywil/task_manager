@@ -20,7 +20,87 @@
   };
 </script>
 
-<div class="border-b-2 border-black">
+<div class="absolute mt-4 flex flex-col gap-2">
+  {#if task.status === Task_Status.TO_DO}
+    <button
+      on:click={() => handleTaskUpdate(Task_Status.IN_PROGRESS)}
+      class="btnTest bg-blue-400 hover:bg-blue-600"
+    >
+      <span class="textTest">In Progress</span>
+    </button>
+    <button
+      on:click={() => handleTaskUpdate(Task_Status.COMPLETED)}
+      class="btnTest bg-green-400 hover:bg-green-600"
+    >
+      <span class="textTest">Completed</span>
+    </button>
+    <button
+      on:click={() => handleTaskUpdate(Task_Status.BLOCKED)}
+      class="btnTest bg-red-400 hover:bg-red-600"
+    >
+      <span class="textTest">Blocked</span>
+    </button>
+  {:else if task.status === Task_Status.IN_PROGRESS}
+    <button
+      on:click={() => handleTaskUpdate(Task_Status.TO_DO)}
+      class="btnTest bg-yellow-400 hover:bg-yellow-600"
+    >
+      <span class="textTest">To Do</span>
+    </button>
+    <button
+      on:click={() => handleTaskUpdate(Task_Status.COMPLETED)}
+      class="btnTest bg-green-400 hover:bg-green-600"
+    >
+      <span class="textTest">Completed</span>
+    </button>
+    <button
+      on:click={() => handleTaskUpdate(Task_Status.BLOCKED)}
+      class="btnTest bg-red-400 hover:bg-red-600"
+    >
+      <span class="textTest">Blocked</span>
+    </button>
+  {:else if task.status === Task_Status.COMPLETED}
+    <button
+      on:click={() => handleTaskUpdate(Task_Status.TO_DO)}
+      class="btnTest bg-yellow-400 hover:bg-yellow-600"
+    >
+      <span class="textTest">To Do</span>
+    </button>
+    <button
+      on:click={() => handleTaskUpdate(Task_Status.IN_PROGRESS)}
+      class="btnTest bg-blue-400 hover:bg-blue-600"
+    >
+      <span class="textTest">In Progress</span>
+    </button>
+    <button
+      on:click={() => handleTaskUpdate(Task_Status.BLOCKED)}
+      class="btnTest bg-red-400 hover:bg-red-600"
+    >
+      <span class="textTest">Blocked</span>
+    </button>
+  {:else}
+    <button
+      on:click={() => handleTaskUpdate(Task_Status.TO_DO)}
+      class="btnTest bg-yellow-400 hover:bg-yellow-600"
+    >
+      <span class="textTest">To Do</span>
+    </button>
+    <button
+      on:click={() => handleTaskUpdate(Task_Status.IN_PROGRESS)}
+      class="btnTest bg-blue-400 hover:bg-blue-600"
+    >
+      <span class="textTest">In Progress</span>
+    </button>
+    <button
+      on:click={() => handleTaskUpdate(Task_Status.COMPLETED)}
+      class="btnTest bg-green-400 hover:bg-green-600"
+    >
+      <span class="textTest">Completed</span>
+    </button>
+  {/if}
+</div>
+
+<!-- <div class="border-b-2 border-black">
   <div class="flex justify-center gap-2">
     {#if task.status === Task_Status.TO_DO}
       <button
@@ -77,4 +157,4 @@
     {/if}
   </div>
   <h1 class="text-sm">status</h1>
-</div>
+</div> -->
