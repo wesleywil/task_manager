@@ -3,7 +3,7 @@ import type { RequestEvent } from "../$types";
 import prisma from "../../../../../prisma/client";
 import { boolenify } from "../../../../utils/utils";
 
-export async function GET({request, params:{id}, locals:{getSession}}) {
+export async function GET({ request, params: { id }, locals: { getSession } }) {
   const session = await getSession();
   try {
     if (session) {
@@ -95,6 +95,7 @@ export async function DELETE({
       await prisma.project.delete({
         where: {
           id: Number(id),
+          userId: session.user.id
         },
       });
       return json(
@@ -103,9 +104,9 @@ export async function DELETE({
       );
     }
     return json({ message: "Unauthorized" }, { status: 401 });
-  } catch (error) {
+  } catch (error: any) {
     return json(
-      { message: "An server error has occurred", error: error },
+      { message: "An server error has occurred", error: error.message },
       { status: 500 }
     );
   }
