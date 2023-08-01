@@ -1,38 +1,80 @@
-# create-svelte
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+# Task Manager
 
-## Creating a project
+Developer Task Manager: Simplify project management for developers. Organize tasks, track progress, and achieve coding milestones with ease.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Screenshots
+
+### Homepage
+![Homepage](https://i.imgur.com/5pq0ZhK.png)
+
+### Projects
+![Projects](https://i.imgur.com/jNMKKN8.png)
+
+### Project Details - Task Update
+![Project Details](https://i.imgur.com/fdhjyVP.gif)
+
+
+### Project Details - Create New Task
+![Project Details](https://i.imgur.com/E70lAsY.gif)
+
+### Form - Create Project
+![Form](https://i.imgur.com/97u3YP0.png)
+
+
+## Tech Stack
+
+**Client:** SvelteKit, Tailwindcss, DaisyUi
+
+**Bakcend:** SvelteKit, Next-auth, Prisma, MySQL...
+
+
+## Run Locally
+
+Clone the project
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+  git clone https://github.com/wesleywil/task_manager
 ```
 
-## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### Frontend
+
+Install dependencies
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+  npm install
 ```
 
-## Building
+Execute the Prisma commands
+```bash 
+   npx prisma generate
+   npx prisma migrate dev
+```
 
-To create a production version of your app:
+Start the server
 
 ```bash
-npm run build
+  npm run dev
 ```
 
-You can preview the production build with `npm run preview`.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`DATABASE_URL`
+
+`NEXTAUTH_SECRET`
+
+`NEXTAUTH_URL`
+
+`GOOGLE_ID`
+
+`GOOGLE_SECRET`
+
+
+## Authors
+
+- [Wesley Wilson](https://github.com/wesleywil)
+
